@@ -36,7 +36,6 @@ begin
     assumption,
 end 
 
-<<<<<<< HEAD
 meta def solve_by_partition (tok1 tok2 : expr) (s : string) : tactic unit := 
 do 
   tactic.interactive.apply ``(by_partition_before_aft %%tok1 %%tok2)
@@ -46,17 +45,6 @@ do
 
 meta def solve (tok : expr) (str : string) : list expr → tactic unit 
 | [] :=  return ()
-=======
-meta def solve_by_partition (tok1 tok2 : expr) (s : string) : tactic string := 
-do 
-  tactic.interactive.apply ``(by_partition_before_aft %%tok1 %%tok2),
-  t1 ← tok1.log_format, t2 ← tok2.log_format,
-  s.log $ "apply by_partition_before_aft" ++ t1 ++ t2 ++ "\n"
-
-
-meta def solve (tok : expr) (str : string) : list expr → tactic string 
-| [] :=  return string.empty
->>>>>>> 63e27cbf4711c89d309d9ecd2af369c127146fff
 | (h::t) := 
    do typ ← infer_type h,
    match typ with 

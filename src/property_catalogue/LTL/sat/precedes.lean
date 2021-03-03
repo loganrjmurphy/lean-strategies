@@ -63,7 +63,6 @@ begin
     contradiction,
 end 
 
-<<<<<<< HEAD
 meta def solve_by_transitive (e₁ e₂ e₃ : expr) (s : string): tactic unit := 
 do
   tactic.interactive.apply ``(by_transitive %%e₁  %%e₂  %%e₃) 
@@ -87,32 +86,6 @@ do
 
 meta def solve (e₁  e₂ : expr) (s : string) : list expr → tactic unit
 | [] :=  return ()
-=======
-meta def solve_by_transitive (e₁ e₂ e₃ : expr) (s : string): tactic string := 
-do
-  tactic.interactive.apply ``(by_transitive %%e₁  %%e₂  %%e₃), 
-  e₁ ← tactic_format_expr e₁,
-    e₂ ← tactic_format_expr e₂,
-    e₃ ← tactic_format_expr e₃,
-
-  tactic.trace e₁,
-  return $  s.append $
-  "apply precedes.globally.by_transitive " ++ 
-  e₁.to_string  ++ " " ++ e₂.to_string  ++ " " ++ e₃.to_string  ++ ",\n"
-
-meta def solve_by_absent_before (e₁ e₂ : expr) (s : string) : 
-tactic string := 
-do  
-  tactic.interactive.apply ``(by_absent_before %%e₁ %%e₂),
-  e₁ ← e₁.log_format,
-  e₂ ← e₂.log_format,
-  s.log $ 
-  "apply precedes.globally.by_absent_before " ++ 
-  e₁ ++ " " ++ e₂ ++ ",\n"
-
-meta def solve (e₁  e₂ : expr) (s : string) : list expr → tactic string
-| [] :=  return string.empty
->>>>>>> 63e27cbf4711c89d309d9ecd2af369c127146fff
 | (h::t) := 
 do typ ← infer_type h,
    match typ with 
