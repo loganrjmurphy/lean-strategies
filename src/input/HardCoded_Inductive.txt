@@ -1,0 +1,9 @@
+property.auxiliary.mk 
+(Claim.mk  
+  {x : path myLTS | true}
+  (fun p : path myLTS, forall i : nat, sat (coe pay) (p.drop i)))
+([ 
+  (fun p : path myLTS, sat (coe pay) p),
+  (fun p : path myLTS, forall i : nat, sat (coe pay) (p.drop i) → sat (coe pay) (p.drop i.succ))
+])
+

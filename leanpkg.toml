@@ -1,0 +1,8 @@
+[package]
+name = "lean-strategies"
+version = "0.1"
+lean_version = "leanprover-community/lean:3.27.0"
+path = "src"
+
+[dependencies]
+mathlib = {git = "https://github.com/leanprover-community/mathlib", rev = "3c9399d168e7d814c75de596a9c181b0925a0506"}
