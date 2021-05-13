@@ -1,0 +1,10 @@
+property.auxiliary.mk 
+
+(Claim.mk  
+  {x : path myLTS | true}
+  (fun p : path myLTS, (sat (coe pay)p) ∧ (sat (coe restart) p)))
+([ 
+  (fun p : path myLTS, sat  (coe pay) p),
+  (fun p : path myLTS, sat  (coe restart) p)
+])
+

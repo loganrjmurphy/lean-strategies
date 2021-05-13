@@ -1,0 +1,8 @@
+property.auxiliary.mk
+(Claim.mk
+{x : path myLTS | true}
+(fun p : path myLTS, sat (precedes.globally (coe pay) (coe restart)) p)
+)
+([
+(fun p : path myLTS, sat (absent.before (coe restart) (coe pay)) p),
+(fun p : path myLTS, sat (exist.globally (coe pay)) p) ])
