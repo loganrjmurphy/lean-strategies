@@ -204,13 +204,13 @@ def pump1 : LTS := LTS.mk S A TR
 ⟨λ a, formula.act a⟩
 
 
-def foo : property.input (path pump1) := 
-property.input.mk
-(Claim.mk
-{x : path pump1 | true}
-(fun p : path pump1, sat (absent.after (coe BolusRequest) (formula.act_predicate (fun a : pump1.Act, a ∈ [Cond_6_3_, Cond_6_5_, Cond_7_3_, Level_Two_Alarm__1, Level_Two_Alarm__2, Level_Two_Alarm__3, Level_Two_Alarm__4, Level_Two_Alarm__5, Level_Two_Alarm__6, x1____MAX_PAUSED_T, x1____MAX_WAIT_INPUT_T]))) p)
-)
-([
-(fun p : path pump1, sat (exist.after (formula.state_predicate (fun s : pump1.S, s ∈ [Alrm_EmptyReservoir, Alrm_LevelTwoHardwareFailure, Alrm_LongWait_ChangeDoseRate, Alrm_TooLongInfusionPause, Alrm_UnsafeNewRate, Alrm_WrongDrug])) (formula.act_predicate (fun a : pump1.Act, a ∈ [Cond_6_3_, Cond_6_5_, Cond_7_3_, Level_Two_Alarm__1, Level_Two_Alarm__2, Level_Two_Alarm__3, Level_Two_Alarm__4, Level_Two_Alarm__5, Level_Two_Alarm__6, x1____MAX_PAUSED_T, x1____MAX_WAIT_INPUT_T]))) p),
-(fun p : path pump1, sat (absent.after (coe BolusRequest) (formula.state_predicate (fun s : pump1.S, s ∈ [Alrm_EmptyReservoir, Alrm_LevelTwoHardwareFailure, Alrm_LongWait_ChangeDoseRate, Alrm_TooLongInfusionPause, Alrm_UnsafeNewRate, Alrm_WrongDrug]))) p)
-])
+-- def foo : property.input (path pump1) := 
+-- property.input.mk
+-- (Claim.mk
+-- {x : path pump1 | true}
+-- (fun p : path pump1, sat (absent.after (coe BolusRequest) (formula.act_predicate (fun a : pump1.Act, a ∈ [Cond_6_3_, Cond_6_5_, Cond_7_3_, Level_Two_Alarm__1, Level_Two_Alarm__2, Level_Two_Alarm__3, Level_Two_Alarm__4, Level_Two_Alarm__5, Level_Two_Alarm__6, x1____MAX_PAUSED_T, x1____MAX_WAIT_INPUT_T]))) p)
+-- )
+-- ([
+-- (fun p : path pump1, sat (exist.after (formula.state_predicate (fun s : pump1.S, s ∈ [Alrm_EmptyReservoir, Alrm_LevelTwoHardwareFailure, Alrm_LongWait_ChangeDoseRate, Alrm_TooLongInfusionPause, Alrm_UnsafeNewRate, Alrm_WrongDrug])) (formula.act_predicate (fun a : pump1.Act, a ∈ [Cond_6_3_, Cond_6_5_, Cond_7_3_, Level_Two_Alarm__1, Level_Two_Alarm__2, Level_Two_Alarm__3, Level_Two_Alarm__4, Level_Two_Alarm__5, Level_Two_Alarm__6, x1____MAX_PAUSED_T, x1____MAX_WAIT_INPUT_T]))) p),
+-- (fun p : path pump1, sat (absent.after (coe BolusRequest) (formula.state_predicate (fun s : pump1.S, s ∈ [Alrm_EmptyReservoir, Alrm_LevelTwoHardwareFailure, Alrm_LongWait_ChangeDoseRate, Alrm_TooLongInfusionPause, Alrm_UnsafeNewRate, Alrm_WrongDrug]))) p)
+-- ])
