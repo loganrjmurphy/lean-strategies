@@ -59,6 +59,8 @@ end globally
 
 namespace between
 
+
+
 theorem absent_between_response {M : LTS} {p : path M} { B I C : formula M} ( A : formula M) : 
 (sat (responds.globally  (C) (A) ) p) ∧ 
 (sat (absent.between (B) (C) (A)) p) ∧  
@@ -122,6 +124,55 @@ rw path.drop_drop,
 end 
 
 
+
+theorem foo {M : LTS} {P Q R : formula M} {x : path M} : (x ⊨ R ⇒ (P W Q)) ↔ (x ⊨ R ⇒ (P U Q)) ∨ (x ⊨ R ⇒ ◾ P) := 
+begin 
+split,
+intro H,
+rw sat at H,
+rw sat.weak_until at H,
+rw imp_or_distrib at H,
+cases H,
+right, assumption,
+left, assumption,
+intro H,
+rw sat,
+rw sat.weak_until,
+cases H,
+intro Hr, replace H := H Hr,
+right, assumption,
+intro Hr, replace H := H Hr,left, assumption,
+end 
+
+theorem absent_after_between_response {M : LTS} {p : path M} { B I C : formula M} ( A : formula M) : 
+(sat (responds.globally  (C) (A) ) p) ∧ 
+(sat (absent.between (B) (C) (A)) p) ∧  
+(sat (absent.after_until (B) (A) (I)) p)→ (sat (absent.after_until (B) (C) (I)) p) := 
+begin
+  rintros ⟨H1, H2, H3⟩,
+  rw after_until, 
+  intro i,
+  rw foo, 
+  left,
+  apply absent_between_response A,split,assumption,
+  split,assumption,
+  clear H2, clear H1,clear i,
+  rw after_until at H3,
+  rw between,
+  intros i H,
+  replace H3 := H3 i H,
+  cases H with L R,
+  cases H3,
+  cases R with w Hw, use w, split, assumption,
+  intros i _,
+  replace H3 := H3 i, assumption, assumption, 
+end 
+
+
+
+
+
+
 meta def solve_by_absent_between_response (A : expr) : tactic unit := 
 do 
   tactic.interactive.apply ``(absent_between_response %%A),
@@ -141,6 +192,54 @@ meta def solve  (str : string) : list expr → tactic unit
 
 end between 
 
+
+namespace after_until
+
+
+theorem absent_after_between_response {M : LTS} {p : path M} { B I C : formula M} ( A : formula M) : 
+(sat (responds.globally  (C) (A) ) p) ∧ 
+(sat (absent.between (B) (C) (A)) p) ∧  
+(sat (absent.after_until (B) (A) (I)) p)→ (sat (absent.after_until (B) (C) (I)) p) := 
+begin
+  rintros ⟨H1, H2, H3⟩,
+  rw after_until, 
+  intro i,
+  rw between.foo, 
+  left,
+  apply between.absent_between_response A,split,assumption,
+  split,assumption,
+  clear H2, clear H1,clear i,
+  rw after_until at H3,
+  rw between,
+  intros i H,
+  replace H3 := H3 i H,
+  cases H with L R,
+  cases H3,
+  cases R with w Hw, use w, split, assumption,
+  intros i _,
+  replace H3 := H3 i, assumption, assumption, 
+end 
+
+
+meta def solve_by_absent_between_response (A : expr) : tactic unit := 
+do 
+  tactic.interactive.apply ``(absent_after_between_response %%A),
+  repeat1 (applyc `and.intro), `[repeat {assumption}]
+
+meta def solve  (str : string) : list expr → tactic unit 
+| [] :=  return ()
+| (h::t) := 
+   do typ ← infer_type h,
+   match typ with 
+   | `(sat (responds.globally %%C %%A) _):=
+     solve_by_absent_between_response A <|> solve t
+   | _ := do solve t 
+   end 
+
+
+
+
+end after_until 
 
 end absent 
 

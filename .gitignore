@@ -1,6 +1,6 @@
 *.olean
 /_target
-/src/leanpkg.path
-/src/pumpold.lean
-/src/myLTS.lean 
-/src/evidence.lean
+src/leanpkg.path
+src/pumpold.lean
+src/myLTS.lean 
+src/evidence.lean

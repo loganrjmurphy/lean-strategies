@@ -13,6 +13,8 @@ do
     absent.globally.solve e₁ s ctx 
   | `(sat (absent.between %%e1 %%e2 %%e3) _) := 
    absent.between.solve s ctx
+  | `(sat (absent.after_until %%e1 %%e2 %%e3) _) := 
+    absent.after_until.solve s ctx
   | _ := return ()
   end 
 

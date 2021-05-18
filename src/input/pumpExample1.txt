@@ -1,10 +1,10 @@
 property.input.mk
 (Claim.mk
 {x : path pump1 | true}
-(fun p : path pump1, sat (absent.between (coe BolusRequest) (coe Cond_6_3_) (coe Infusion_NormalOperation)) p)
+(fun p : path pump1, sat (absent.after_until (coe BolusRequest) (coe Cond_6_3_) (coe Infusion_NormalOperation)) p)
 )
 ([
-(fun p : path pump1, sat (responds.globally  (coe Cond_6_3_) (coe Alrm_EmptyReservoir)) p),
+(fun p : path pump1, sat (responds.globally (coe Cond_6_3_) (coe Alrm_EmptyReservoir) ) p),
 (fun p : path pump1, sat (absent.between (coe BolusRequest) (coe Cond_6_3_) (coe Alrm_EmptyReservoir)) p),
-(fun p : path pump1, sat (absent.between (coe BolusRequest) (coe Alrm_EmptyReservoir) (coe Infusion_NormalOperation)) p)
+(fun p : path pump1, sat (absent.after_until (coe BolusRequest) (coe Alrm_EmptyReservoir) (coe Infusion_NormalOperation)) p)
 ])
