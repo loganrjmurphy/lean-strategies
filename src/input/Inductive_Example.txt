@@ -3,5 +3,5 @@ property.input.mk
 ( Claim.mk {x : path fcs | true} 
     (λ π, π ⊨ absent.globally (coe Damaged)))
     ([ λ π, π ⊨ not_init (coe Damaged) , 
-       λ π, π ⊨ holds_over_transition (coe Damaged)]
+       λ π, π ⊨ transitions_safe (coe Damaged)]
     )

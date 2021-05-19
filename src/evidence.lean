@@ -14,7 +14,9 @@ import justification pump1 common_meta property_catalogue.LTL
 
 theorem pump1_prf_1 : deductive (path pump1) pump1_strat_1 := 
 begin 
-
+analyze 3, 
+ apply absent.after_until.from_absent_between_response, 
+ match_premises,
 end
 
 
